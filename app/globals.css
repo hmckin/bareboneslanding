@@ -152,3 +152,8 @@
   animation: racing-beam-square 3s linear infinite;
   filter: drop-shadow(0 0 6px #FFC56F);
 }
+
+/* Simple reverse animation for glow-drift */
+.animate-glow-drift-reverse {
+  animation: glow-drift 8s ease-in-out infinite reverse;
+}
