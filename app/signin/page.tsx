@@ -4,13 +4,30 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ArrowLeft, Mail, Github } from "lucide-react"
-import { useState } from "react"
-
+import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
 
 export default function SignIn() {
   const [email, setEmail] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState('')
+  const [selectedPlan, setSelectedPlan] = useState<any>(null)
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    // Get plan context from URL parameters
+    const plan = searchParams.get('plan')
+    const price = searchParams.get('price')
+    const billing = searchParams.get('billing')
+    
+    if (plan && price) {
+      setSelectedPlan({
+        name: plan,
+        price: price,
+        billing: billing || 'monthly'
+      })
+    }
+  }, [searchParams])
 
   const handleMagicLink = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -19,7 +36,12 @@ export default function SignIn() {
     
     try {
       // TODO: Implement Supabase magic link authentication
-      console.log('Sending magic link to:', email)
+      // Include plan context for Stripe integration
+      if (selectedPlan) {
+        console.log('Sending magic link to:', email, 'for plan:', selectedPlan)
+      } else {
+        console.log('Sending magic link to:', email)
+      }
       setMessage('Magic link sent! Check your email.')
     } catch (error) {
       setMessage('Error sending magic link. Please try again.')
@@ -34,7 +56,12 @@ export default function SignIn() {
     
     try {
       // TODO: Implement Supabase SSO authentication
-      console.log('Signing in with:', provider)
+      // Include plan context for Stripe integration
+      if (selectedPlan) {
+        console.log('Signing in with:', provider, 'for plan:', selectedPlan)
+      } else {
+        console.log('Signing in with:', provider)
+      }
       setMessage(`Redirecting to ${provider}...`)
     } catch (error) {
       setMessage('Error with SSO. Please try again.')
@@ -75,7 +102,7 @@ export default function SignIn() {
           <div className="text-center mb-8">
             <img src="/images/barebones-black.svg" alt="barebones" className="h-16 w-auto" />
           </div>
-          
+
           {/* Sign In Form */}
           <div className="w-full max-w-md">
 
@@ -173,8 +200,8 @@ export default function SignIn() {
             {/* Footer */}
             <div className="mt-8 text-center text-sm text-gray-600">
               <p>Don't have an account?{' '}
-                <Link href="/signup" className="text-black hover:text-gray-800 font-medium underline">
-                  Sign up
+                <Link href="/" className="text-black hover:text-gray-800 font-medium underline">
+                  View pricing plans
                 </Link>
               </p>
             </div>

@@ -58,16 +58,18 @@ export default function Home() {
             {/* Sign In & Sign Up */}
             <div className="flex items-center space-x-4">
               <Link href="/signin" className="text-gray-900 hover:text-gray-600 transition-colors">Sign in</Link>
-              <Button size="lg" className="bg-black text-white hover:bg-gray-800 px-4 py-2 text-sm rounded-full">
-                Sign up
-              </Button>
+              <Link href="/signin?plan=Free&price=0&billing=monthly">
+                <Button size="lg" className="bg-black text-white hover:bg-gray-800 px-4 py-2 text-sm rounded-full">
+                  Sign up
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="pt-64 pb-32 bg-white">
+      <section className="pt-48 pb-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-9xl md:text-7xl font-bold text-gray-900 mb-2">
             Dead simple ticketing
@@ -78,9 +80,11 @@ export default function Home() {
           
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <Button size="lg" className="bg-black text-white hover:bg-gray-800 px-8 py-6 text-lg rounded-full">
-              Get Started
-            </Button>
+            <Link href="/signin?plan=Free&price=0&billing=monthly">
+              <Button size="lg" className="bg-black text-white hover:bg-gray-800 px-8 py-6 text-lg rounded-full">
+                Get Started
+              </Button>
+            </Link>
             <Button size="lg" variant="outline" className="border-2 border-black text-black hover:bg-black hover:text-white px-8 py-6 text-lg rounded-full" onClick={() => document.getElementById('product')?.scrollIntoView({ behavior: 'smooth' })}>
               Watch Demo
             </Button>
@@ -91,7 +95,7 @@ export default function Home() {
             {/* Blurred gradient background starting off-screen left */}
             <div className="absolute -left-96 top-3/4 transform -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-pink-400 to-[#FFC56F] rounded-full blur-3xl opacity-80"></div>
             
-            <div id="product" className="w-full max-w-4xl h-[600px] bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl flex items-center justify-center relative -mb-48 z-10 scroll-mt-32">
+            <div id="product" className="w-full max-w-4xl h-[600px] bg-white/50 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl flex items-center justify-center relative -mb-48 z-10 scroll-mt-32">
               <div className="text-center text-gray-600">
                 <p className="text-lg mb-2">🎬</p>
                 <p className="text-sm">GIF Placeholder</p>
@@ -416,9 +420,11 @@ export default function Home() {
                 </ul>
               </CardContent>
               <div className="p-6 pt-0">
-                <Button size="lg" className="w-full bg-black text-white hover:bg-gray-800 px-8 py-6 text-lg rounded-full">
-                  Sign Up
-                </Button>
+                <Link href="/signin?plan=Free&price=0&billing=monthly">
+                  <Button size="lg" className="w-full bg-black text-white hover:bg-gray-800 px-8 py-6 text-lg rounded-full">
+                    Sign Up
+                  </Button>
+                </Link>
               </div>
             </Card>
 
@@ -446,9 +452,11 @@ export default function Home() {
                 </ul>
               </CardContent>
               <div className="p-6 pt-0">
-                <Button size="lg" className="w-full bg-amber-600 text-white hover:bg-amber-500 px-8 py-6 text-lg rounded-full">
-                  Sign Up
-                </Button>
+                <Link href={`/signin?plan=Pro&price=${isYearly ? pricing.pro.yearly : pricing.pro.monthly}&billing=${isYearly ? 'yearly' : 'monthly'}`}>
+                  <Button size="lg" className="w-full bg-amber-600 text-white hover:bg-amber-500 px-8 py-6 text-lg rounded-full">
+                    Sign Up
+                  </Button>
+                </Link>
               </div>
             </Card>
 
@@ -476,9 +484,11 @@ export default function Home() {
                 </ul>
               </CardContent>
               <div className="p-6 pt-0">
-                <Button size="lg" className="w-full bg-black text-white hover:bg-gray-800 px-8 py-6 text-lg rounded-full">
-                  Sign Up
-                </Button>
+                <Link href={`/signin?plan=Team&price=${isYearly ? pricing.team.yearly : pricing.team.monthly}&billing=${isYearly ? 'yearly' : 'monthly'}`}>
+                  <Button size="lg" className="w-full bg-black text-white hover:bg-gray-800 px-8 py-6 text-lg rounded-full">
+                    Sign Up
+                  </Button>
+                </Link>
               </div>
             </Card>
           </div>
